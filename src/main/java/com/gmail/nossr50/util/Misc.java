@@ -122,6 +122,10 @@ public final class Misc {
             return null;
         }
 
+        // Make sure drops spawn in the middle of the block. Prevents them from clipping through walls.
+        location = location.getBlock().getLocation().clone();
+        location.add(0.5, 0, 0.5);
+
         return location.getWorld().dropItemNaturally(location, itemStack);
     }
 
