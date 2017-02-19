@@ -103,10 +103,6 @@ public class ExperienceConfig extends AutoUpdateConfigLoader {
             reason.add("Experience.Combat.Multiplier.Animals should be at least 0!");
         }
 
-        if (getWitherSkeletonXP() < 0) {
-            reason.add("Experience.Combat.Multiplier.Wither_Skeleton should be at least 0!");
-        }
-
         if (getDodgeXPModifier() < 0) {
             reason.add("Skills.Acrobatics.Dodge_XP_Modifier should be at least 0!");
         }
@@ -207,9 +203,8 @@ public class ExperienceConfig extends AutoUpdateConfigLoader {
 
     /* Combat XP Multipliers */
     public double getCombatXP(EntityType entity) { return config.getDouble("Experience.Combat.Multiplier." + StringUtils.getPrettyEntityTypeString(entity).replace(" ", "_")); }
+    public double getAnimalsXP(EntityType entity) { return config.getDouble("Experience.Combat.Multiplier." + StringUtils.getPrettyEntityTypeString(entity).replace(" ", "_"), getAnimalsXP()); }
     public double getAnimalsXP() { return config.getDouble("Experience.Combat.Multiplier.Animals", 1.0); }
-    public double getWitherSkeletonXP() { return config.getDouble("Experience.Combat.Multiplier.Wither_Skeleton", 4.0); }
-    public double getElderGuardianXP() { return config.getDouble("Experience.Combat.Multiplier.Elder_Guardian", 4.0); }
 
     /* Materials  */
     public int getXp(SkillType skill, Material material) { return config.getInt("Experience." + StringUtils.getCapitalized(skill.toString()) + "." + StringUtils.getPrettyItemString(material).replace(" ", "_")); }
