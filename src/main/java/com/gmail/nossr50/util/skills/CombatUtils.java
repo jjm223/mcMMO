@@ -55,6 +55,10 @@ public final class CombatUtils {
     private CombatUtils() {}
 
     private static void processSwordCombat(LivingEntity target, Player player, EntityDamageByEntityEvent event) {
+        if (event.getCause() == DamageCause.THORNS) {
+            return;
+        }
+        
         McMMOPlayer mcMMOPlayer = UserManager.getPlayer(player);
         SwordsManager swordsManager = mcMMOPlayer.getSwordsManager();
         double initialDamage = event.getDamage();
@@ -76,6 +80,10 @@ public final class CombatUtils {
     }
 
     private static void processAxeCombat(LivingEntity target, Player player, EntityDamageByEntityEvent event) {
+        if (event.getCause() == DamageCause.THORNS) {
+            return;
+        }
+        
         double initialDamage = event.getDamage();
         double finalDamage = initialDamage;
         Map<DamageModifier, Double> modifiers = getModifiers(event);
@@ -111,6 +119,10 @@ public final class CombatUtils {
     }
 
     private static void processUnarmedCombat(LivingEntity target, Player player, EntityDamageByEntityEvent event) {
+        if (event.getCause() == DamageCause.THORNS) {
+            return;
+        }
+        
         double initialDamage = event.getDamage();
         double finalDamage = initialDamage;
 
@@ -465,56 +477,22 @@ public final class CombatUtils {
             else if (target instanceof Monster)
             {
                 EntityType type = target.getType();
-                baseXP = ExperienceConfig.getInstance().getCombatXP(type);
+                
+                if (type == EntityType.IRON_GOLEM)
+                {
+                    if (!((IronGolem) target).isPlayerCreated()) {
+                        baseXP = ExperienceConfig.getInstance().getCombatXP(type);
+                    }
+                }
+                else
+                {
+                    baseXP = ExperienceConfig.getInstance().getCombatXP(type);
+                }
+                
             }
             else {
-                EntityType type = target.getType();
-
-                switch (type) {
-                    case BAT:
-                    case SQUID:
-                    case RABBIT:
-                        baseXP = ExperienceConfig.getInstance().getAnimalsXP(type);
-                        break;
-
-                    case BLAZE:
-                    case CAVE_SPIDER:
-                    case CREEPER:
-                    case ENDER_DRAGON:
-                    case ENDERMAN:
-                    case ENDERMITE:
-                    case GHAST:
-                    case GIANT:
-                    case MAGMA_CUBE:
-                    case PIG_ZOMBIE:
-                    case SHULKER:
-                    case SILVERFISH:
-                    case SLIME:
-                    case SPIDER:
-                    case WITCH:
-                    case WITHER:
-                    case ZOMBIE_VILLAGER:
-                    case ZOMBIE:
-                    case GUARDIAN:
-                    case ELDER_GUARDIAN:
-                    case HUSK:
-                    case STRAY:
-                    case WITHER_SKELETON:
-                        baseXP = ExperienceConfig.getInstance().getCombatXP(type);
-
-                        break;
-
-                    case IRON_GOLEM:
-                        if (!((IronGolem) target).isPlayerCreated()) {
-                            baseXP = ExperienceConfig.getInstance().getCombatXP(type);
-                        }
-                        break;
-
-                    default:
-                        baseXP = 1.0;
-                        mcMMO.getModManager().addCustomEntity(target);
-                        break;
-                }
+                baseXP = 1.0;
+                mcMMO.getModManager().addCustomEntity(target);
             }
 
             if (target.hasMetadata(mcMMO.entityMetadataKey)) {
