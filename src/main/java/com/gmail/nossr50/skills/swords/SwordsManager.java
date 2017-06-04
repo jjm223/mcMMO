@@ -58,7 +58,7 @@ public class SwordsManager extends SkillManager {
             }
 
             if (mcMMOPlayer.useChatNotifications()) {
-                getPlayer().sendMessage(LocaleLoader.getString("Swords.Combat.Bleeding"));
+                getPlayer().sendTitle(null, null, LocaleLoader.getString("Swords.Combat.Bleeding"), -1, -1, -1);
             }
 
             if (target instanceof Player) {
