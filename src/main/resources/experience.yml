@@ -146,8 +146,8 @@ Experience:
         Generic: 70
         Jungle: 100
         Redwood: 80
-        Huge_Mushroom_Red: 70
-        Huge_Mushroom_Brown: 70
+        Huge_Mushroom_1: 70
+        Huge_Mushroom_2: 70
     Herbalism:
         Allium: 300
         Azure_Bluet: 150
@@ -184,6 +184,12 @@ Experience:
         Water_Lily: 100
         White_Tulip: 150
         Yellow_Flower: 100
+        Beetroot_Block_Ungrown: 0
+        Carrot_Ungrown: 0
+        Potato_Ungrown: 0
+        Crops_Ungrown: 0
+        Nether_Warts_Ungrown: 0
+        Cocoa_Ungrown: 0
     Mining:
         Coal_Ore: 100
         Diamond_Ore: 750
@@ -287,3 +293,5 @@ Experience:
             Ocelot: 1.0
             Villager: 1.0
             Snowman: 0.0
+            Parrot: 1.0
+            Illusioner: 3.0
