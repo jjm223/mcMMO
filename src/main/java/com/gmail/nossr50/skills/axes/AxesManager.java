@@ -75,7 +75,7 @@ public class AxesManager extends SkillManager {
         Player player = getPlayer();
 
         if (mcMMOPlayer.useChatNotifications()) {
-            player.sendMessage(LocaleLoader.getString("Axes.Combat.CriticalHit"));
+            getPlayer().sendTitle(null, null, LocaleLoader.getString("Axes.Combat.CriticalHit"), -1, -1, -1);
         }
 
         if (target instanceof Player) {
